@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BookStore</string>
+    <string name="results">Results</string>
+    <string name="search">Search By</string>
+    <string name="no_result">No result found</string>
+    <string-array name="fields">
+        <item>Book Title</item>
+        <item>Author name</item>
+        <item>Subject</item>
+        <item>Publisher\'s name</item>
+    </string-array>
+</resources>
