@@ -108,33 +108,23 @@ public class Util {
     }
 
     private static List<Book> extractFeatureFromJson(String bookJSON) {
-        // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(bookJSON)) {
             return null;
         }
 
-        // Create an empty ArrayList that we can start adding books to
         List<Book> books = new ArrayList<>();
 
-        // Try to parse the JSON response string. If there's a problem with the way the JSON
-        // is formatted, a JSONException exception object will be thrown.
-        // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
 
-            // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(bookJSON);
             if (baseJsonResponse != null) {
                 Log.v("Here: ", "First line clear");
             }
 
-            // Extract the JSONArray associated with the key called "features",
-            // which represents a list of features (or books).
             JSONArray bookArray = baseJsonResponse.getJSONArray("items");
 
-            // For each book in the bookArray, create an {@link Book} object
             for (int i = 0; i < bookArray.length(); i++) {
 
-                // Get a single book at position i within the list of books
                 JSONObject currentBook = bookArray.getJSONObject(i);
 
                 JSONObject volumeInfo = currentBook.getJSONObject("volumeInfo");
