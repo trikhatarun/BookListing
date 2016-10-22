@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 booklist.clear();
-                Log.v("Onclick", "Button Clickd");
                 String selected = spinner.getSelectedItem().toString();
                 if (selected.contains("Title")) {
                     query = "intitle:";
