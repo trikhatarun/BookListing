@@ -39,8 +39,15 @@ public class MainActivity extends AppCompatActivity {
         ImageButton search = (ImageButton) findViewById(R.id.search);
         final LinearLayout result = (LinearLayout) findViewById(R.id.result);
         bookListView.setAdapter(bookAdapter);
-        if (savedInstanceState == null || !savedInstanceState.containsKey("list")) {
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        if (savedInstanceState != null && savedInstanceState.containsKey("list")) {
+            {
+                result.setVisibility(View.VISIBLE);
+                noResult.setVisibility(View.GONE);
+                booklist = savedInstanceState.getParcelableArrayList("list");
+                bookAdapter.addAll(booklist);
+            }
+        }
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,12 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(websiteIntent);
             }
         });
-    } else {
-            result.setVisibility(View.VISIBLE);
-            noResult.setVisibility(View.GONE);
-            booklist = savedInstanceState.getParcelableArrayList("list");
-            bookAdapter.addAll(booklist);
-        }
     }
 
     @Override
@@ -107,12 +108,14 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(List<Book> books) {
             bookAdapter.clear();
             if (books != null && !books.isEmpty()) {
+                bookListView.setVisibility(View.VISIBLE);
                 noResult.setVisibility(View.GONE);
                 booklist = (ArrayList<Book>) books;
                 bookAdapter.addAll(booklist);
-            } else
+            } else {
                 bookListView.setVisibility(View.GONE);
-            noResult.setVisibility(View.VISIBLE);
+                noResult.setVisibility(View.VISIBLE);
+            }
         }
     }
 }
