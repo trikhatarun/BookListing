@@ -117,9 +117,6 @@ public class Util {
         try {
 
             JSONObject baseJsonResponse = new JSONObject(bookJSON);
-            if (baseJsonResponse != null) {
-                Log.v("Here: ", "First line clear");
-            }
 
             JSONArray bookArray = baseJsonResponse.getJSONArray("items");
 
@@ -134,10 +131,15 @@ public class Util {
                     subtitle = volumeInfo.getString("subtitle");
                 } else
                     title = volumeInfo.getString("title");
-
-                JSONArray authors = volumeInfo.getJSONArray("authors");
+                JSONArray authors;
+                if (volumeInfo.has("authors")) {
+                    authors = volumeInfo.getJSONArray("authors");
+                } else
+                    authors = null;
                 String author = "";
-                if (authors.length() == 1)
+                if (authors == null) {
+                    author = "No author found";
+                } else if (authors.length() == 1)
                     author = authors.getString(0);
                 else
                     for (int j = 0; j < authors.length(); j++) {
